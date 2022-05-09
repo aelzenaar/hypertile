@@ -1,3 +1,7 @@
+module sternbrocot
+
+export binary_from_fraction, fraction_from_matrix, matrix_from_binary, fraction_from_binary, left_child, right_child, left_summand, right_summand, parent
+
 using LinearAlgebra
 
 L = [1,1; 0,1];
@@ -47,7 +51,7 @@ function left_child(B)
   return append(B,'L')
 end
 
-function left_child(B)
+function right_child(B)
   return append(B,'R')
 end
 
@@ -59,11 +63,19 @@ end
 "Produce the left Farey summand for B."
 function left_summand(B)
   M = matrix_from_binary(B)
-  return (M[1,1],M[2,1])
+  return binary_from_fraction(M[1,1],M[2,1])
 end
 
 "Produce the right Farey summand for B."
 function right_summand(B)
   M = matrix_from_binary(B)
-  return (M[1,2],M[2,2])
+  return binary_from_fraction(M[1,2],M[2,2])
+end
+
+
+
+struct Tree
+  depth::Int
+end
+
 end
